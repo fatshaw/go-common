@@ -1,0 +1,25 @@
+### Go ###
+**/vendor
+vendor
+/pgk
+/bin
+
+### Gradle ###
+.gradle
+.gogradle
+/build
+**/github.com
+
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Vscode ###
+.project
+debug
+/output
+/.settings
+/.vscode
