@@ -9,11 +9,10 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-var conMap = make(map[string]string)
+var confUrl string
 
 func init() {
-	conMap["dev"] = os.Getenv("DEV_CONF_URL")
-	conMap["prod"] = os.Getenv("PROD_CONF_URL")
+	confUrl = os.Getenv("CONF_URL")
 }
 
 func GetAppConfig(appName string, v interface{}) {
@@ -23,7 +22,7 @@ func GetAppConfig(appName string, v interface{}) {
 		environment = "dev"
 	}
 
-	resp, err := http.Get(fmt.Sprintf("%s/%s.yml", conMap[environment], appName))
+	resp, err := http.Get(fmt.Sprintf("%s/%s.yml", confUrl, appName))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -40,7 +39,7 @@ func GetAppConfig(appName string, v interface{}) {
 
 	log.Printf("%v", v)
 
-	resp, err = http.Get(fmt.Sprintf("%s/%s-%s.yml", conMap[environment], appName, environment))
+	resp, err = http.Get(fmt.Sprintf("%s/%s-%s.yml", confUrl, appName, environment))
 	if err != nil {
 		log.Fatal(err)
 	}
